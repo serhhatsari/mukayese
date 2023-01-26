@@ -3,7 +3,6 @@ package internal
 import (
 	"bufio"
 	"os"
-	"strings"
 )
 
 func ParseSumFile(f *os.File) (map[string]string, error) {
@@ -11,16 +10,9 @@ func ParseSumFile(f *os.File) (map[string]string, error) {
 
 	scanner := bufio.NewScanner(f)
 	for i := 1; scanner.Scan(); i++ {
-		s := strings.Split(scanner.Text(), "@")
+		checksum := Parse(scanner.Text())
 
-		path := s[0]
-		checksum := s[1]
-
-		c := strings.Split(checksum, ":")
-
-		hash := c[1]
-
-		datas[path] = hash
+		datas[checksum.path] = checksum.hash
 	}
 
 	//rd := bufio.NewReader(f)
@@ -38,9 +30,9 @@ func ParseSumFile(f *os.File) (map[string]string, error) {
 	//	s := strings.Split(line, "@")
 	//
 	//	path := s[0]
-	//	checksum := s[1]
+	//	hash := s[1]
 	//
-	//	c := strings.Split(checksum, ":")
+	//	c := strings.Split(hash, ":")
 	//
 	//	hash := c[1]
 	//

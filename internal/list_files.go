@@ -34,8 +34,8 @@ func ListFilesChecksums(summary map[string]string, path string) {
 
 		// check is dir
 		if !entry.IsDir() {
-			summary[newPath] = Checksum(newPath)
-			//fmt.Printf("%s -> %s\n", newPath, checksum)
+			summary[newPath] = Hasher(&newPath)
+			//fmt.Printf("%s -> %s\n", newPath, hash)
 
 		} else {
 			ListFilesChecksums(summary, newPath)

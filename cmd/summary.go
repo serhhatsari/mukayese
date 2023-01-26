@@ -50,9 +50,7 @@ to quickly create a Cobra application.`,
 		}
 
 		if output == "" {
-			for key, val := range hashSummaryCurrent {
-				fmt.Printf("%s@sha256:%s\n", key, val)
-			}
+			internal.PrintMap("", &hashSummaryCurrent)
 		} else {
 			success := internal.Export(output, &hashSummaryCurrent)
 			if success {

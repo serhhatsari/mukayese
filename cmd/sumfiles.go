@@ -85,7 +85,7 @@ to quickly create a Cobra application.`,
 
 		isEmpty := internal.IsEmpty(added, changed, deleted)
 		if isEmpty {
-			log.Println("Sum files are same!")
+			log.Println("Checksum files are same!")
 		} else {
 			// Deleted
 			internal.PrintMap("Added", &added)
