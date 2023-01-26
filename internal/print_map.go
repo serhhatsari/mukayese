@@ -2,7 +2,6 @@ package internal
 
 import (
 	"fmt"
-	"sort"
 )
 
 func PrintMap(title string, datas *map[string]string) {
@@ -15,14 +14,9 @@ func PrintMap(title string, datas *map[string]string) {
 		return
 	}
 
-	var sortedDatas []string
-	for key, val := range *datas {
-		s := Format(&key, &val)
-		sortedDatas = append(sortedDatas, s)
-	}
-	sort.Strings(sortedDatas)
+	sortedDatas := Sort(datas)
 
-	for _, data := range sortedDatas {
+	for _, data := range *sortedDatas {
 		fmt.Println(data)
 	}
 }

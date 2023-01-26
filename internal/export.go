@@ -14,8 +14,10 @@ func Export(filename string, checksums *map[string]string) bool {
 	}
 	defer f.Close()
 
-	for key, val := range *checksums {
-		fmt.Fprintf(f, "%s@sha256:%s\n", key, val)
+	sortedDatas := Sort(checksums)
+
+	for i := 0; i < len(*sortedDatas); i++ {
+		fmt.Fprintf(f, "%s\n", (*sortedDatas)[i])
 	}
 
 	return true
