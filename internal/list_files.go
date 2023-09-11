@@ -6,6 +6,15 @@ import (
 	"path/filepath"
 )
 
+func deleteFirstPart(s string) string {
+	for i := 0; i < len(s); i++ {
+		if s[i] == '/' {
+			return s[i+1:]
+		}
+	}
+	return s
+}
+
 func ListFilesChecksums(summary map[string]string, path string) {
 
 	entries, err := os.ReadDir(path)
@@ -34,9 +43,11 @@ func ListFilesChecksums(summary map[string]string, path string) {
 
 		// check is dir
 		if !entry.IsDir() {
-			summary[newPath] = Hasher(&newPath)
-			//fmt.Printf("%s -> %s\n", newPath, hash)
 
+			// remove the first part of path
+			updatedPath := deleteFirstPart(newPath)
+
+			summary[updatedPath] = Hasher(&newPath)
 		} else {
 			ListFilesChecksums(summary, newPath)
 		}
