@@ -1,5 +1,4 @@
 # Mukayese
-
 Compare two directory to find added, changed and deleted files
 
 ```shell
