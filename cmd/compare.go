@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/yildizozan/mukayese/internal"
 )
@@ -36,12 +37,14 @@ func compareFolders(cmd *cobra.Command, args []string) {
 	internal.ListFilesChecksums(hashSummaryCurrent, args[0])
 	internal.ListFilesChecksums(hashSummaryPrevious, args[1])
 
-	fmt.Printf("Current: \n")
+	color.Cyan("-- Comparing %s and %s --\n\n", args[0], args[1])
+
+	color.Cyan("Current: \n")
 	for key, val := range hashSummaryCurrent {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
 
-	fmt.Printf("Previous: \n")
+	color.Cyan("\nPrevious: \n")
 	for key, val := range hashSummaryPrevious {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
@@ -79,22 +82,25 @@ func compareFolders(cmd *cobra.Command, args []string) {
 		}
 	}
 
+	// Print results
+	color.Cyan("\n\n-- RESULTS --\n")
+
 	// Added
-	fmt.Printf("Added: \n")
+	color.Green("\nAdded: \n")
 	for key, val := range added {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
 	fmt.Println()
 
 	// Changed
-	fmt.Printf("Changed: \n")
+	color.Yellow("Changed: \n")
 	for key, val := range changed {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
 	fmt.Println()
 
 	// Deleted
-	fmt.Printf("Deleted: \n")
+	color.Red("Deleted: \n")
 	for key, val := range deleted {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
