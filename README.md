@@ -1,10 +1,13 @@
 # Mukayese
 Compare two directory to find added, changed and deleted files
 
-```shell
-mukayese ./dir1 ./dir2
+## Usage
+### Command: `mukayese compare`   
+Compare two directory to find added, changed and deleted files  
 ```
-
-```shell
-mukayese ./new ./old
+mukayese compare <dir1> <dir2>
 ```
+### Examples
+```
+mukayese compare f1 f2
+```  
