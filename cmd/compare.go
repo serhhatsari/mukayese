@@ -89,15 +89,13 @@ func compareFolders(cmd *cobra.Command, args []string) {
 	for key, val := range added {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
-	fmt.Println()
 
-	color.Yellow("Changed: \n")
+	color.Yellow("\nChanged: \n")
 	for key, val := range changed {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
-	fmt.Println()
 
-	color.Red("Deleted: \n")
+	color.Red("\nDeleted: \n")
 	for key, val := range deleted {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
