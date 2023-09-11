@@ -10,7 +10,7 @@ import (
 
 // check arguments for compare command
 // 2 arguments are required
-func checkArgs(cmd *cobra.Command, args []string) error {
+func checkCompareArgs(cmd *cobra.Command, args []string) error {
 	if err := cobra.MinimumNArgs(2)(cmd, args); err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ var compareCmd = &cobra.Command{
 	Use:   "compare",
 	Short: "Compare directories.",
 	Long:  `Compare two directory to find added, changed and deleted files.`,
-	Args:  checkArgs,
+	Args:  checkCompareArgs,
 	Run:   compareFolders,
 }
 
