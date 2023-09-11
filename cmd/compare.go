@@ -30,11 +30,8 @@ func checkArgs(cmd *cobra.Command, args []string) error {
 
 func compareFolders(cmd *cobra.Command, args []string) {
 
-	var hashSummaryCurrent map[string]string
-	var hashSummaryPrevious map[string]string
-
-	hashSummaryCurrent = make(map[string]string)
-	hashSummaryPrevious = make(map[string]string)
+	hashSummaryCurrent := make(map[string]string)
+	hashSummaryPrevious := make(map[string]string)
 
 	internal.ListFilesChecksums(hashSummaryCurrent, args[0])
 	internal.ListFilesChecksums(hashSummaryPrevious, args[1])
