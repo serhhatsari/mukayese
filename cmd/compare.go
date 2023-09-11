@@ -19,11 +19,11 @@ func checkArgs(cmd *cobra.Command, args []string) error {
 	}
 
 	if !internal.IsDirectory(args[0]) {
-		return fmt.Errorf("current path is not directory")
+		return fmt.Errorf(color.RedString("Current path is not a directory: %s\n", args[0]))
 	}
 
 	if !internal.IsDirectory(args[1]) {
-		return fmt.Errorf("previous path is not directory")
+		return fmt.Errorf(color.RedString("Previous path is not a directory: %s\n", args[1]))
 	}
 
 	return nil
