@@ -5,21 +5,17 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/spf13/cobra"
 	"github.com/yildizozan/mukayese/internal"
-	"log"
 )
 
 // compareCmd represents the compare command
 var compareCmd = &cobra.Command{
 	Use:   "compare",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Compare directories.",
+	Long:  `Compare two directory to find added, changed and deleted files.`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if err := cobra.MinimumNArgs(2)(cmd, args); err != nil {
 			return err
