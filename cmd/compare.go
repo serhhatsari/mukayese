@@ -53,6 +53,7 @@ func compareFolders(cmd *cobra.Command, args []string) {
 	changed := make(map[string]string)
 	deleted := make(map[string]string)
 
+	// Determine added and changed files
 	for currKey, currVal := range hashSummaryCurrent {
 		exist := true
 		for prevKey, prevVal := range hashSummaryPrevious {
@@ -68,7 +69,7 @@ func compareFolders(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Determine deteled files
+	// Determine deleted files
 	for prevKey, prevVal := range hashSummaryPrevious {
 		exist := true
 		for currKey := range hashSummaryCurrent {
@@ -82,24 +83,20 @@ func compareFolders(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Print results
 	color.Cyan("\n\n-- RESULTS --\n")
 
-	// Added
 	color.Green("\nAdded: \n")
 	for key, val := range added {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
 	fmt.Println()
 
-	// Changed
 	color.Yellow("Changed: \n")
 	for key, val := range changed {
 		fmt.Printf("%s@sha256:%s\n", key, val)
 	}
 	fmt.Println()
 
-	// Deleted
 	color.Red("Deleted: \n")
 	for key, val := range deleted {
 		fmt.Printf("%s@sha256:%s\n", key, val)
