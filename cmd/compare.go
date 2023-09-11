@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/spf13/cobra"
 	"github.com/yildizozan/mukayese/internal"
@@ -17,6 +16,15 @@ func checkArgs(cmd *cobra.Command, args []string) error {
 	if err := cobra.MaximumNArgs(2)(cmd, args); err != nil {
 		return err
 	}
+
+	if !internal.IsDirectory(args[0]) {
+		return fmt.Errorf("current path is not directory")
+	}
+
+	if !internal.IsDirectory(args[1]) {
+		return fmt.Errorf("previous path is not directory")
+	}
+
 	return nil
 }
 
@@ -24,14 +32,6 @@ func compareFolders(cmd *cobra.Command, args []string) {
 
 	var hashSummaryCurrent map[string]string
 	var hashSummaryPrevious map[string]string
-
-	if !internal.IsDirectory(args[0]) {
-		log.Fatal("current path is not directory")
-	}
-
-	if !internal.IsDirectory(args[1]) {
-		log.Fatal("previous path is not directory")
-	}
 
 	hashSummaryCurrent = make(map[string]string)
 	hashSummaryPrevious = make(map[string]string)
